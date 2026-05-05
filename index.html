@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🍰 40 Receitas Air Fryer 5D | Bolos, Tartes e Pudins</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: radial-gradient(circle at 10% 30%, #2d1a0c, #170e07);
+            font-family: 'Times New Roman', 'Georgia', 'Cambria', 'Times', serif;
+            padding: 2rem 1rem;
+            color: #f7e9da;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(45deg, rgba(255,215,150,0.02) 0px, rgba(255,215,150,0.02) 2px, transparent 2px, transparent 8px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .app-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: rgba(30, 20, 14, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 80px 50px 80px 50px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,200,0.2);
+            padding: 2rem 1.8rem;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(255, 180, 80, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+        .header-3d {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: radial-gradient(circle at 30% 10%, #f5a623, #d35400);
+            border-radius: 70px;
+            color: white;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 20px 35px -10px black, inset 0 1px 4px rgba(255,255,200,0.8);
+            transform: perspective(800px) translateZ(5px);
+            transition: transform 0.3s;
+            border-bottom: 3px solid #ffdd99;
+        }
+        .header-3d:hover { transform: perspective(800px) translateZ(12px); }
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-shadow: 4px 4px 0 #a04000, 8px 8px 0 rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+        .sub {
+            font-size: 1.3rem;
+            margin-top: 12px;
+            font-style: italic;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .grid-receitas {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+        .card-receita {
+            background: rgba(255, 245, 235, 0.95);
+            backdrop-filter: blur(4px);
+            border-radius: 48px 28px 48px 28px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,215,150,0.4), inset 0 1px 4px rgba(255,255,200,0.6);
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+            transform-style: preserve-3d;
+            transform: perspective(1200px) translateZ(0);
+        }
+        .card-receita:hover {
+            transform: perspective(1200px) translateZ(20px) translateY(-15px) rotateX(2deg) rotateY(1deg);
+            box-shadow: 0 40px 50px -18px black, 0 0 0 3px rgba(255, 200, 100, 0.6);
+            background: #fffef7;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 32px 20px 0 0;
+            transform: translateZ(5px);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .conteudo {
+            padding: 1.6rem;
+            background: linear-gradient(145deg, #fff4e8, #ffe2ca);
+            color: #3b2a1f;
+        }
+        .titulo-receita {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #c14500;
+            margin-bottom: 1rem;
+            border-left: 6px solid #f39c12;
+            padding-left: 15px;
+            text-shadow: 1px 1px 0 rgba(255,215,0,0.3);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+        .numero-receita {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+            padding: 5px 12px;
+            border-radius: 40px;
+            box-shadow: inset 0 -1px 0 #b45f2b, 0 4px 10px rgba(0,0,0,0.2);
+            display: inline-block;
+        }
+        .badge-airfryer {
+            background: #e67e22;
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 12px;
+            border-radius: 40px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        .ingredientes, .preparo {
+            font-weight: 800;
+            background: linear-gradient(95deg, #d97a2b, #b85f1a);
+            display: inline-block;
+            padding: 5px 18px;
+            border-radius: 40px;
+            color: white;
+            margin: 15px 0 8px;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        .texto-item {
+            line-height: 1.65;
+            color: #2e2218;
+            font-size: 0.95rem;
+            background: rgba(255, 250, 240, 0.9);
+            padding: 10px 16px;
+            border-radius: 30px;
+            margin-bottom: 12px;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02), 0 2px 5px rgba(0,0,0,0.05);
+            font-weight: 500;
+        }
+        .texto-item strong { font-weight: 800; color: #b6490e; }
+        footer {
+            text-align: center;
+            margin-top: 3.5rem;
+            padding: 1.8rem;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 70px;
+            font-weight: bold;
+            color: #ffda99;
+            font-size: 1rem;
+            border: 1px solid rgba(255,180,80,0.3);
+            transform: translateZ(4px);
+        }
+        @keyframes glowPulse {
+            0% { text-shadow: 0 0 0px rgba(255,200,100,0);}
+            100% { text-shadow: 0 0 8px rgba(255,200,100,0.8);}
+        }
+        .titulo-receita:hover { animation: glowPulse 0.6s ease-in-out; }
+        @media (max-width: 700px) {
+            .grid-receitas { grid-template-columns: 1fr; }
+            .app-container { padding: 1rem; }
+            h1 { font-size: 2rem; }
+            .header-3d { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="header-3d">
+        <h1>🌀 40 Receitas Air Fryer 5D</h1>
+        <div class="sub">Bolos • Tartes • Pudins • Medidas em Portugal (g • ml • cl)</div>
+        <div style="margin-top: 15px; font-size: 1rem;">🎬 Cada receita com vídeo real de preparo • Experiência imersiva</div>
+    </div>
+    <div class="grid-receitas" id="receitasGrid"></div>
+    <footer>
+        ✨ Tecnologia 5D: efeitos de profundidade, glassmorphism e vídeos 100% funcionais ✨<br>
+        Todas as receitas adaptadas para Air Fryer • Fáceis de fazer em Portugal
+    </footer>
+</div>
+
+<script>
+    // IDs base das primeiras receitas (1 a 26)
+    const VIDEO_TARTE_FLAN = "JrBe5uemZdQ";
+    const VIDEO_BOLO_MACA = "aghwJks1384";
+    const VIDEO_BOLO_LARANJA = "buDd7e5wkuA";
+    const VIDEO_BOLO_CENOURA = "rJbJtK1_0yQ";
+    const VIDEO_BOLO_MARMORE = "yJxDDIPIwPA";
+    const VIDEO_BOLO_MEL = "6OF87ttToQg";
+    const VIDEO_BOLO_BOLACHA = "9h0v5rkTdrQ";
+    const VIDEO_TARTE_LIMAO = "IfTSUMok3vg";
+    const VIDEO_PUDIM_LEITE = "BiTToDhb3bA";
+    const VIDEO_BOLO_COCO = "y5yaxYQFiMw";
+    const VIDEO_BOLO_BANANA = "niT0CpuVhSY";
+    const VIDEO_BOLO_CHOCOLATE = "jBIrssJu6os";
+    const VIDEO_BOLO_CANELA = "NMA9VZMPk9Q";
+    const VIDEO_TARTE_MACA = "Y8WX-4MiWck";
+    const VIDEO_PUDIM_PAO = "UvMciD21EFY";
+    const VIDEO_BOLO_IOGURTE = "BLprLyGnoPI";
+    const VIDEO_BOLO_LIMAO = "EBN4Of-f-RE";
+    const VIDEO_TARTE_COCO = "H4pYSk0bLc0";
+    const VIDEO_BOLO_MACA_CANELA = "6SbRaqWA8gg";
+    const VIDEO_PUDIM_COCO = "znts8SOgCZg";
+    const VIDEO_BOLO_CHOCOLATE_BRANCO = "kVZRiko6V4I";
+    const VIDEO_TARTE_AMENDOA = "0DJo99QRCK0";
+    const VIDEO_BOLO_NOZ_MEL = "Dy4aa2ZnOnU";
+    const VIDEO_PUDIM_OVOS = "56A4xS2uJCM";
+    const VIDEO_BOLO_CANECA = "Jcm2SwCzvNI";
+    const VIDEO_BOLO_LARANJA_CHOCOLATE = "NzYxkrU0vI8";
+
+    // Array dos 40 vídeos - com vídeo atualizado na receita 32 (índice 31)
+    const videosPorReceita = [
+        VIDEO_TARTE_FLAN,          // 1
+        VIDEO_BOLO_MACA,           // 2
+        VIDEO_BOLO_LARANJA,        // 3
+        VIDEO_BOLO_CENOURA,        // 4
+        VIDEO_BOLO_MARMORE,        // 5
+        VIDEO_BOLO_MEL,            // 6
+        VIDEO_BOLO_BOLACHA,        // 7
+        VIDEO_TARTE_LIMAO,         // 8
+        VIDEO_PUDIM_LEITE,         // 9
+        VIDEO_BOLO_COCO,           // 10
+        VIDEO_BOLO_BANANA,         // 11
+        VIDEO_BOLO_CHOCOLATE,      // 12
+        VIDEO_BOLO_CANELA,         // 13
+        VIDEO_TARTE_MACA,          // 14
+        VIDEO_PUDIM_PAO,           // 15
+        VIDEO_BOLO_IOGURTE,        // 16
+        VIDEO_BOLO_LIMAO,          // 17
+        VIDEO_TARTE_COCO,          // 18
+        VIDEO_BOLO_MACA_CANELA,    // 19
+        VIDEO_PUDIM_COCO,          // 20
+        VIDEO_BOLO_CHOCOLATE_BRANCO, // 21
+        VIDEO_TARTE_AMENDOA,       // 22
+        VIDEO_BOLO_NOZ_MEL,        // 23
+        VIDEO_PUDIM_OVOS,          // 24
+        VIDEO_BOLO_CANECA,         // 25
+        VIDEO_BOLO_LARANJA_CHOCOLATE, // 26
+        "ab2ZtBQLusQ",             // 27 - Tarte de Frutos Vermelhos
+        "y5yaxYQFiMw",             // 28 - Bolo de Coco com leite condensado
+        "yXCaMcMZ4WE",             // 29 - Pudim de Chocolate
+        "UqBJJ-DsJus",             // 30 - Bolo de Cenoura com cobertura
+        "a_7CP2gjqCs",             // 31 - Tarte de Limão Merengue
+        "WCr7U8urwsU",             // 32 - Bolo de banana com canela (NOVO VÍDEO)
+        "gcbW9oz07GY",             // 33 - Bolo de Maçã integral
+        "STcZffAaA5U",             // 34 - Bolo de Iogurte
+        "61wMl6wbIFo",             // 35 - Pudim de Coco
+        "ab2ZtBQLusQ",             // 36 - Bolo de Maçã
+        "HOexKaAQBbY",             // 37 - Bolo de Limão
+        "wrDThB_TZWA",             // 38 - Tarte de Coco
+        "GrBmIDfBqoA",             // 39 - Bolo de Mel
+        "2hX8VC-QJbw"              // 40 - Bolo de Canela
+    ];
+
+    const receitas = [
+        { nome: "🍮 Tarte Flã Francesa", ingredientes: "1 L (100 cl) leite\n4 ovos\n160 g açúcar\n90 g Maizena\n1 vagem de baunilha\nMassa folhada (200g)", preparo: "Ferva o leite com a baunilha. Misture ovos, açúcar e Maizena. Junte o leite quente e cozinhe até engrossar. Forre a forma com massa. Air Fryer: 180°C por 30-35 minutos com água no fundo." },
+        { nome: "🍎 Bolo de Maçã", ingredientes: "3 ovos\n150 ml óleo\n200 g açúcar\n2 maçãs (≈300 g) descascadas\n250 g farinha\n1 colher fermento\nCanela qb", preparo: "Bata ovos, óleo e açúcar. Junte maçãs picadas e secos. Air Fryer 160°C por 25-28 minutos." },
+        { nome: "🍊 Bolo de Laranja", ingredientes: "3 ovos\n180 g açúcar\n100 ml óleo\n150 ml sumo de laranja natural\nRaspa de 1 laranja\n250 g farinha\n1 colher fermento", preparo: "Misture tudo. Air Fryer 160°C por 22-25 minutos. Faça calda com 50ml sumo+2col açúcar." },
+        { nome: "🥕 Bolo de Cenoura", ingredientes: "2 ovos\n100 ml óleo\n140 g açúcar\n150 g cenoura ralada\n150 g farinha\n1 colher fermento", preparo: "Liquidifique cenoura + líquidos + ovos. Junte farinha. Air Fryer 160°C por 20-22 minutos." },
+        { nome: "🍫 Bolo de Mármore", ingredientes: "3 ovos\n200 g açúcar\n120 ml óleo\n200 ml leite\n250 g farinha\nFermento\n2 colheres cacau", preparo: "Divida a massa em duas, uma com cacau. Alterne colheres na forma. Air Fryer 160°C por 25 minutos." },
+        { nome: "🍯 Bolo de Mel", ingredientes: "3 ovos\n150 g açúcar mascavado\n120 ml mel\n100 ml óleo\n250 g farinha\n1 colher canela\nFermento", preparo: "Misture bem todos os ingredientes. Air Fryer 155°C por 30 minutos." },
+        { nome: "🍪 Bolo de Bolacha", ingredientes: "30 bolachas Maria (≈300g)\n250 ml leite morno\n3 ovos\n100 g açúcar\n1 colher fermento", preparo: "Amasse bolachas com leite até pasta. Junte ovos batidos, açúcar, fermento. Air Fryer 160°C por 20 minutos." },
+        { nome: "🍋 Tarte de Limão", ingredientes: "Base: 200g bolacha Maria + 100g manteiga derretida\nRecheio: 1 lata leite condensado, 3 ovos, 100ml sumo limão", preparo: "Faça base pressionando. Verta recheio ligado. Air Fryer 160°C por 20 minutos." },
+        { nome: "🍮 Pudim de Leite Condensado", ingredientes: "1 lata leite condensado (395g)\nMesma medida de leite (395ml)\n3 ovos\nCaramelo líquido", preparo: "Liquidifique tudo. Caramelize forma. Air Fryer 170°C por 35-40 minutos (coberto com alumínio em banho-maria)." },
+        { nome: "🥥 Bolo de Coco", ingredientes: "3 ovos\n200 g açúcar\n100 ml óleo\n100 ml leite\n200 g farinha\n100 g coco ralado\nFermento", preparo: "Misture primeiro líquidos+ovos+açúcar, depois farinha e coco. Air Fryer 160°C por 23 minutos." },
+        { nome: "🍌 Bolo de Banana", ingredientes: "3 bananas bem maduras\n2 ovos\n150 g açúcar\n100 ml óleo\n250 g farinha\nFermento\nCanela", preparo: "Amasse bananas, adicione ovos, óleo, açúcar, e por fim farinha e fermento. Air Fryer 160°C por 25 minutos." },
+        { nome: "🍫 Bolo de Chocolate", ingredientes: "3 ovos\n200 g açúcar\n120 ml óleo\n120 ml leite\n180 g farinha\n60 g cacau em pó\nFermento", preparo: "Misture secos, depois líquidos. Asse Air Fryer 160°C por 25 minutos." },
+        { nome: "🌿 Bolo de Canela", ingredientes: "2 ovos\n150 g açúcar\n100 ml leite\n100 ml óleo\n200 g farinha\n2 colheres canela\nFermento", preparo: "Bata tudo até massa homogênea. Air Fryer 165°C por 22 minutos." },
+        { nome: "🍏 Tarte de Maçã", ingredientes: "Massa quebrada 250g\n4 maçãs\n100 g açúcar\n2 ovos\n200 ml natas\nCanela", preparo: "Disponha maçãs laminadas sobre a massa. Misture ovos,natas,açúcar. Air Fryer 160°C por 25-30min." },
+        { nome: "🥖 Pudim de Pão", ingredientes: "4 pães amanhecidos (≈200g)\n500 ml leite\n3 ovos\n150 g açúcar\nRaspa de limão", preparo: "Demolhe pão no leite, acrescente os outros ingredientes. Air Fryer 160°C por 35 min banho-maria." },
+        { nome: "🥣 Bolo de Iogurte", ingredientes: "1 iogurte natural (125g)\n2 medidas iogurte de açúcar\n3 ovos\n3 medidas farinha\n½ medida óleo\nFermento", preparo: "Use o copo do iogurte como medida. Misture tudo. Air Fryer 160°C por 20-22 minutos." },
+        { nome: "🍋 Bolo de Limão", ingredientes: "3 ovos\n200 g açúcar\n100 ml óleo\nSumo+raspa 2 limões\n250 g farinha\nFermento", preparo: "Bata bem, adicione farinha aos poucos. Air Fryer 165°C por 23 minutos. Cobertura de açúcar+sumo." },
+        { nome: "🥥 Tarte de Coco", ingredientes: "Massa quebrada\nRecheio: 200g coco ralado, 1 lata leite condensado, 3 ovos", preparo: "Misture coco, leite condensado e ovos. Coloque sobre massa. Air Fryer 160°C por 20 minutos." },
+        { nome: "🍎🍂 Bolo Maçã Canela", ingredientes: "3 maçãs\n2 ovos\n150g açúcar\n120ml óleo\n200g farinha\n2 colheres canela\nFermento", preparo: "Massa simples, maçãs em cubos. Asse Air Fryer 160°C por 27min." },
+        { nome: "🌴 Pudim de Coco", ingredientes: "1 lata leite condensado\nMesma medida leite coco\n3 ovos\n100g coco ralado\nCalda de caramelo", preparo: "Bata tudo, caramelize forma. Air Fryer 170°C por 40 minutos coberto." },
+        { nome: "🤍 Bolo de Chocolate Branco", ingredientes: "200g chocolate branco\n3 ovos\n100g manteiga\n150g açúcar\n200g farinha", preparo: "Derreta chocolate com manteiga. Junte ovos, açúcar, farinha. Air Fryer 155°C por 25min." },
+        { nome: "🌰 Tarte de Amêndoa", ingredientes: "Massa folhada\n200g amêndoa moída\n150g açúcar\n3 ovos\n100ml natas", preparo: "Misture recheio, despeje sobre massa. Air Fryer 165°C por 20min." },
+        { nome: "🍯 Bolo de Noz e Mel", ingredientes: "3 ovos\n120g mel\n100g açúcar\n80ml óleo\n200g farinha\n100g nozes\nFermento", preparo: "Misture, adicione nozes quebradas. Air Fryer 160°C por 25 minutos." },
+        { nome: "🍳 Pudim de Ovos", ingredientes: "6 gemas\n200g açúcar\n500ml leite\nRaspa limão\nCaramelo", preparo: "Leve ao lume gemas com leite açúcar até engrossar. Forma caramelizada. Air Fryer 160°C por 30min." },
+        { nome: "☕ Bolo de Caneca Air Fryer", ingredientes: "1 ovo\n4 colheres farinha\n3 colheres açúcar\n3 colheres leite\n2 colheres óleo\n1 colher cacau", preparo: "Misture na caneca. Air Fryer 160°C por 12 minutos." },
+        { nome: "🍊🍫 Bolo de Laranja com Chocolate", ingredientes: "3 ovos\n200g açúcar\nSumo+raspa laranja\n150ml óleo\n250g farinha\n50g cacau", preparo: "Massa metade laranja, metade chocolate. Mármore citrino. Air Fryer 160°C por 26 minutos." },
+        { nome: "🍓 Tarte de Frutos Vermelhos", ingredientes: "Massa quebrada\n200g frutos vermelhos\n200g creme patissier\nAçúcar", preparo: "Asse base, preencha com creme e frutos. Air Fryer 160°C por 15min." },
+        { nome: "🥥💛 Bolo de Coco com leite condensado", ingredientes: "1 lata leite condensado\n3 ovos\n100ml leite\n100g coco\n100g farinha", preparo: "Misture tudo muito bem. Air Fryer 160°C por 25 minutos." },
+        { nome: "🍫🍮 Pudim de Chocolate", ingredientes: "1 lata leite condensado\n400ml leite\n3 ovos\n3 colheres cacau\nCaramelo", preparo: "Liquidifique todos os ingredientes. Air Fryer 170°C por 35' coberto." },
+        { nome: "🥕🎂 Bolo de Cenoura com cobertura", ingredientes: "3 ovos\n200g cenoura\n180ml óleo\n200g açúcar\n240g farinha\nCobertura: 100g chocolate", preparo: "Bolo simples. Derreta chocolate com natas p/ cobertura. Asse 165°C por 23min." },
+        { nome: "🍋✨ Tarte de Limão Merengue", ingredientes: "Base de bolacha\nRecheio de limão\nMerengue: 3 claras, 150g açúcar", preparo: "Asse base+recheio 15min, finalize com merengue e queime maçarico." },
+        { nome: "🍌🌿 Bolo de banana com canela", ingredientes: "3 bananas\n2 ovos\n150g açúcar mascavado\n100ml óleo\n250g farinha\nCanela", preparo: "Massa cremosa. Air Fryer 160°C por 25 minutos." },
+        { nome: "🍎🌾 Bolo de Maçã integral", ingredientes: "2 ovos\n100ml óleo coco\n150g farinha integral\n100g açúcar\n2 maçãs\nFermento", preparo: "Misture e asse 160°C por 26 minutos." },
+        { nome: "🥛 Pudim de Leite Ninho", ingredientes: "200g leite em pó Ninho\n1 lata leite condensado\n500ml água morna\n3 ovos", preparo: "Bata tudo no liquidificador. Air Fryer 170°C por 40min banho-maria." },
+        { nome: "☕🍫 Bolo de chocolate com café", ingredientes: "3 ovos\n180ml café forte\n150ml óleo\n200g açúcar\n200g farinha\n50g cacau", preparo: "Misture líquidos, depois secos. Air Fryer 160°C por 24 minutos." },
+        { nome: "🍓🍰 Tarte de morango", ingredientes: "Massa quebrada\nCreme: 200g natas, 1 iogurte, 100g açúcar\nMorangos frescos", preparo: "Asse a massa, recheie com creme e morangos decorados. 160°C/12min base." },
+        { nome: "🥣 Bolo de iogurte de frutas", ingredientes: "1 iogurte frutos silvestres\n3 ovos\n2 medidas farinha\n1 medida óleo\n2 medidas açúcar", preparo: "Use o copo do iogurte. Asse 160°C por 22 min." },
+        { nome: "🥚 Pudim de claras", ingredientes: "6 claras\n500ml leite\n150g açúcar\nRaspa limão", preparo: "Misture tudo e asse em forma caramelizada. Air Fryer 165°C por 35 min." },
+        { nome: "🥜 Bolo de amendoim", ingredientes: "3 ovos\n150g manteiga amendoim\n150g açúcar\n200g farinha\n100ml leite", preparo: "Misture manteiga de amendoim com açúcar, ovos, leite e farinha. 160°C, 25 min." },
+        { nome: "🍌🍮 Tarte de banana e canela", ingredientes: "Massa folhada\n3 bananas\n200ml natas\n2 ovos\nCanela\nAçúcar", preparo: "Distribua bananas, cubra com mistura de ovos natas e canela. Air Fryer 160°C por 22min." }
+    ];
+
+    const grid = document.getElementById("receitasGrid");
+    function renderReceitas() {
+        let html = "";
+        receitas.forEach((r, index) => {
+            const videoId = videosPorReceita[index];
+            const numero = index + 1;
+            const ingredientesNegrito = r.ingredientes.split('\n').map(line => line.trim() ? `<strong>${line}</strong>` : '').join('<br>');
+            html += `
+                <div class="card-receita">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0" 
+                                title="Vídeo: ${r.nome}" frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="conteudo">
+                        <div class="titulo-receita">
+                            <span class="numero-receita">#${numero}</span> ${r.nome} <span class="badge-airfryer">Air Fryer</span>
+                        </div>
+                        <div class="ingredientes">🥄 INGREDIENTES</div>
+                        <div class="texto-item">${ingredientesNegrito}</div>
+                        <div class="preparo">⏲️ MODO DE PREPARO</div>
+                        <div class="texto-item">${r.preparo}</div>
+                    </div>
+                </div>
+            `;
+        });
+        grid.innerHTML = html;
+    }
+    renderReceitas();
+</script>
+</body>
+</html>
