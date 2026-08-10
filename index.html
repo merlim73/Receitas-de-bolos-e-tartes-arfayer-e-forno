@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>🍰 40 Receitas Air Fryer 5D | Bolos, Tartes e Pudins</title>
+    <title>🍰 42 Receitas Air Fryer 5D | Bolos, Tartes e Pudins</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -137,6 +137,19 @@
             border-radius: 40px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
+        .badge-nova {
+            background: #27ae60;
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 10px;
+            border-radius: 40px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); background: #2ecc71; }
+        }
         .ingredientes, .preparo {
             font-weight: 800;
             background: linear-gradient(95deg, #d97a2b, #b85f1a);
@@ -162,6 +175,117 @@
             font-weight: 500;
         }
         .texto-item strong { font-weight: 800; color: #b6490e; }
+
+        /* Bloco de categorias com links extra (colapsável, para o app não ficar grande) */
+        .categorias-links {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 0.5rem 0 1rem;
+            padding: 1.5rem 2rem;
+            background: radial-gradient(circle at 30% 10%, rgba(255, 200, 100, 0.15), rgba(180, 100, 30, 0.1));
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            border: 2px solid rgba(255, 180, 80, 0.3);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .categorias-links:hover {
+            border-color: rgba(255, 180, 80, 0.6);
+            background: radial-gradient(circle at 30% 10%, rgba(255, 200, 100, 0.25), rgba(180, 100, 30, 0.18));
+        }
+        .categorias-links .titulo-links {
+            color: #ffda99;
+            font-size: 1.3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .categorias-links .titulo-links .emoji-link {
+            font-size: 1.6rem;
+            margin-right: 10px;
+        }
+        .botoes-categoria {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+        .btn-categoria {
+            cursor: pointer;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: inherit;
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: rgba(255, 200, 100, 0.12);
+            border: 1px solid rgba(255, 200, 100, 0.25);
+            transition: all 0.3s ease;
+        }
+        .btn-categoria:hover {
+            background: rgba(255, 200, 100, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border-color: rgba(255, 200, 100, 0.5);
+        }
+        .btn-categoria.ativo {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            border-color: #ffdd99;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+        }
+        .btn-categoria .contagem {
+            opacity: 0.8;
+            font-size: 0.75rem;
+            margin-left: 3px;
+        }
+        .painel-categoria {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 6px;
+            padding-top: 14px;
+            border-top: 1px dashed rgba(255, 200, 100, 0.3);
+        }
+        .painel-categoria.aberto { display: flex; }
+        .painel-categoria a {
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 26px;
+            background: rgba(255, 200, 100, 0.1);
+            border: 1px solid rgba(255, 200, 100, 0.15);
+            transition: all 0.3s ease;
+        }
+        .painel-categoria a:hover {
+            background: rgba(255, 200, 100, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border-color: rgba(255, 200, 100, 0.5);
+        }
+        .painel-categoria.grelha-video {
+            gap: 14px;
+        }
+        .video-mini {
+            width: 240px;
+            max-width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 10px 22px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,200,100,0.3);
+        }
+        .video-mini iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         footer {
             text-align: center;
             margin-top: 3.5rem;
@@ -185,13 +309,17 @@
             .app-container { padding: 1rem; }
             h1 { font-size: 2rem; }
             .header-3d { padding: 1.2rem; }
+            .categorias-links { padding: 1rem; }
+            .categorias-links .titulo-links { font-size: 1.1rem; }
+            .btn-categoria { font-size: 0.7rem; padding: 6px 14px; }
+            .painel-categoria a { font-size: 0.7rem; padding: 4px 10px; white-space: normal; }
         }
     </style>
 </head>
 <body>
 <div class="app-container">
     <div class="header-3d">
-        <h1>🌀 40 Receitas Air Fryer 5D</h1>
+        <h1>🌀 42 Receitas Air Fryer 5D</h1>
         <div class="sub">Bolos • Tartes • Pudins • Medidas em Portugal (g • ml • cl)</div>
         <div style="margin-top: 15px; font-size: 1rem;">🎬 Cada receita com vídeo real de preparo • Experiência imersiva</div>
     </div>
@@ -201,7 +329,6 @@
         Todas as receitas adaptadas para Air Fryer • Fáceis de fazer em Portugal
     </footer>
 </div>
-
 <script>
     // IDs base das primeiras receitas (1 a 26)
     const VIDEO_TARTE_FLAN = "JrBe5uemZdQ";
@@ -221,7 +348,7 @@
     const VIDEO_PUDIM_PAO = "UvMciD21EFY";
     const VIDEO_BOLO_IOGURTE = "BLprLyGnoPI";
     const VIDEO_BOLO_LIMAO = "EBN4Of-f-RE";
-    const VIDEO_TARTE_COCO = "H4pYSk0bLc0";
+    const VIDEO_TARTE_COCO = "GEBlKlMpYEs";
     const VIDEO_BOLO_MACA_CANELA = "6SbRaqWA8gg";
     const VIDEO_PUDIM_COCO = "znts8SOgCZg";
     const VIDEO_BOLO_CHOCOLATE_BRANCO = "kVZRiko6V4I";
@@ -231,7 +358,7 @@
     const VIDEO_BOLO_CANECA = "Jcm2SwCzvNI";
     const VIDEO_BOLO_LARANJA_CHOCOLATE = "NzYxkrU0vI8";
 
-    // Array dos 40 vídeos - com vídeo atualizado na receita 32 (índice 31)
+    // Array dos 42 vídeos
     const videosPorReceita = [
         VIDEO_TARTE_FLAN,          // 1
         VIDEO_BOLO_MACA,           // 2
@@ -264,7 +391,7 @@
         "yXCaMcMZ4WE",             // 29 - Pudim de Chocolate
         "UqBJJ-DsJus",             // 30 - Bolo de Cenoura com cobertura
         "a_7CP2gjqCs",             // 31 - Tarte de Limão Merengue
-        "WCr7U8urwsU",             // 32 - Bolo de banana com canela (NOVO VÍDEO)
+        "WCr7U8urwsU",             // 32 - Bolo de banana com canela
         "gcbW9oz07GY",             // 33 - Bolo de Maçã integral
         "STcZffAaA5U",             // 34 - Bolo de Iogurte
         "61wMl6wbIFo",             // 35 - Pudim de Coco
@@ -272,7 +399,9 @@
         "HOexKaAQBbY",             // 37 - Bolo de Limão
         "wrDThB_TZWA",             // 38 - Tarte de Coco
         "GrBmIDfBqoA",             // 39 - Bolo de Mel
-        "2hX8VC-QJbw"              // 40 - Bolo de Canela
+        "2hX8VC-QJbw",             // 40 - Bolo de Canela
+        "UvMciD21EFY",             // 41 - Bolo de Queijo com Doce de Abóbora
+        "uv1W4Dud1WE"              // 42 - Tarte de Maçã Simples (sem massa) NOVA
     ];
 
     const receitas = [
@@ -315,16 +444,127 @@
         { nome: "🥣 Bolo de iogurte de frutas", ingredientes: "1 iogurte frutos silvestres\n3 ovos\n2 medidas farinha\n1 medida óleo\n2 medidas açúcar", preparo: "Use o copo do iogurte. Asse 160°C por 22 min." },
         { nome: "🥚 Pudim de claras", ingredientes: "6 claras\n500ml leite\n150g açúcar\nRaspa limão", preparo: "Misture tudo e asse em forma caramelizada. Air Fryer 165°C por 35 min." },
         { nome: "🥜 Bolo de amendoim", ingredientes: "3 ovos\n150g manteiga amendoim\n150g açúcar\n200g farinha\n100ml leite", preparo: "Misture manteiga de amendoim com açúcar, ovos, leite e farinha. 160°C, 25 min." },
-        { nome: "🍌🍮 Tarte de banana e canela", ingredientes: "Massa folhada\n3 bananas\n200ml natas\n2 ovos\nCanela\nAçúcar", preparo: "Distribua bananas, cubra com mistura de ovos natas e canela. Air Fryer 160°C por 22min." }
+        { nome: "🍌🍮 Tarte de banana e canela", ingredientes: "Massa folhada\n3 bananas\n200ml natas\n2 ovos\nCanela\nAçúcar", preparo: "Distribua bananas, cubra com mistura de ovos natas e canela. Air Fryer 160°C por 22min." },
+        { nome: "🧀🍂 Bolo de Queijo com Doce de Abóbora", ingredientes: "200 g queijo creme\n150 g doce de abóbora\n3 ovos\n150 g açúcar\n120 ml óleo\n250 g farinha\n1 colher fermento", preparo: "Misture o queijo creme com o doce de abóbora. Bata os ovos com o açúcar e óleo, junte à mistura anterior e envolva a farinha. Air Fryer 160°C por 25-28 minutos." },
+        { nome: "🍎🥧 Tarte de Maçã Simples (sem massa)", ingredientes: "6 maçãs\n100 g açúcar\n2 colheres de canela\nSumo de 1 limão\n50 g manteiga\n1 colher de farinha", preparo: "Descasque e corte as maçãs em fatias finas. Misture com açúcar, canela e sumo de limão. Coloque numa forma untada com manteiga e polvilhe com farinha. Leve ao Air Fryer a 180°C por 20-25 minutos até dourar." }
     ];
 
+    // Lista de todos os links extra (agrupados por categoria no ecrã final)
+    const linksExtras = [
+        { url: "https://youtube.com/watch?v=cJUQ5kmWN5w&is=jhPD-uoiQAqMmH-_", titulo: "🍎 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=au4U7K509sY&is=23Fj-ZVhgNy18zBe", titulo: "🍏 Bolo de Maçã Fofinho" },
+        { url: "https://youtube.com/watch?v=WgFVBw4UNQ8&is=WvhZEnX5K7QmgRKB", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=CGEXlpqiL2A&is=ogidFYLBOZnB-Mnw", titulo: "🍎 Bolo Maçã Canela" },
+        { url: "https://youtube.com/watch?v=9ZzNM9fz4-8&is=UfjpC8AZn64fzRU-", titulo: "🍏 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=CGmSSoU8vSM&is=3EmC9gtKenvnRA3Z", titulo: "🍎 Bolo Maçã Super Fofinho" },
+        { url: "https://youtube.com/watch?v=8DDSu2dE8RY&is=j9pfNdztYUoduEGt", titulo: "🥧 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=roodku_8YV0&is=wX-Y9H6AAIjO6ls-", titulo: "🍏 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=zLJZfwcPYV0&is=iz2AQmJLXnDzomOS", titulo: "🍎 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=oNO-sAxbunk&is=sGcvTMC4SPPGAqmw", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=dGt8b8K_F9M&is=KX_6mRDRvQVSrXHG", titulo: "🍏 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=6SbRaqWA8gg&is=p9TBEEzMjFugakl2", titulo: "🍎 Tarte de Coco" },
+        { url: "https://youtube.com/watch?v=xcSsS4yWXHg&is=m735xEDWwMwZVyrx", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=66T69sEln3U&is=fockH8ujLFSf273H", titulo: "🍏 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=ahs95VyF8lE&is=IL1VgsafPhuf_dKy", titulo: "🍎 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=QizaCCZg_JE&is=NHWuMJLoL_40yO6G", titulo: "🥧 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=zmf2USPlp98&is=2rvwm6k6CLs6ao-L", titulo: "🍏 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=TDkGSMkZwhc&is=C1zv715OcIXUk_PI", titulo: "🍎 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=XzEe4tdjlfM&is=6hhY9Qt13DPZ1usi", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=671OCo0sHC0&is=3P_gsq4yXzMa1qkc", titulo: "🍏 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=hWrW08TExsE&is=lQzwPf-f-Pb_wQYB", titulo: "🍎 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=HrVvS5jEjWA&is=SqBZDzuNVAs0oac5", titulo: "🥧 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=yJxDDIPIwPA&is=8JvlMKB2MKvbjSNv", titulo: "🍫 Bolo de Mármore" },
+        { url: "https://youtube.com/watch?v=C-mjYEXai-w&is=lMSrhyQRG_dYxDVG", titulo: "🍏 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=2JB2ym3JZHk&is=vg9Ize_NWYr2J2D1", titulo: "🍎 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=ZqvMXxdDsn4&is=jtCL0vcbJEWtuoXR", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=FlX8rKiXaeM&is=r_X0fLmSqsJRkWq-", titulo: "🍏 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=saBM8d5les4&is=6RzAwKyp_z-FbeQu", titulo: "🍎 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=FZVdP9SMUfs&is=JbrBN_uxTocTOaOV", titulo: "🥧 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=R_TGIPp8CvQ&is=8fui7fk7qScUrUp1", titulo: "🍏 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=bHUX3Sfp4ag&is=5GxuHn_lQGQ4MaRK", titulo: "🍎 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=kcScANhkqyg&is=3ouWJVDAfUcOC2XL", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=cFWhV6844yw&is=B0xir_yf0FLvlt4g", titulo: "🍏 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=RR2To1eR6PM&is=keCFx5ZpQmIsam8p", titulo: "🍎 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=jTxO-Sxy2U0&is=un4Lppf5MgEukilw", titulo: "🥧 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=ZppwJv6kVVI&is=EZa_5KQcDEtMH3Ld", titulo: "🍏 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=XNBGxyKuWns&is=dRtWBAoAEpRLzZfG", titulo: "🍎 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=-QBYTOlotfA&is=wrjgDT20ZojoGaDR", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=VGGOvYplwd8&is=0BESxNVAW0EZG9kP", titulo: "🍏 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=jETOSBitPmk&is=f-siskgO1HGHzsm3", titulo: "🍎 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=7S4m4KvC4e4&is=6ifNJ25-O7Vjq0A9", titulo: "🥧 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=WXDxE0Y6f9A&is=XNJ7aME5JFHkqfMS", titulo: "🍏 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=YzM-G4POWGk&is=n4j1X3ccAQXJ-fQh", titulo: "🍎 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=2biKbif49UA&is=zDUiB56YY7jyKisZ", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=KTaheuNBvOM&is=TntkcKvbD6Ehx0MA", titulo: "🍏 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=QNDMreunVnA&is=5gqWbMngv-PoN2p8", titulo: "🍎 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=bJVwAyx8vTM&is=eUwHdZggDl6GC8DS", titulo: "🥧 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=QXw6C437YwM&is=qLfgR9eMkJTBFY-Z", titulo: "🍏 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=FMHHvNVLjmM&is=JlUj474VZfA3Zm81", titulo: "🍎 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=e105QF1UHiY&is=UAFzPUi2rGRbP8j0", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=vlrHvNO7iTc&is=N2nYPG5w_xxkuaE2", titulo: "🍏 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=s6oInkt1vIU&is=4gFg9SNumBogTQLL", titulo: "🍎 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=xW5-ZGeEyro&is=n7anFDDf9IQsNywH", titulo: "🥧 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=_36NYb9FnsA&is=37zsev-QtvnJXw5W", titulo: "🍏 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=1Y5JF_y5AXY&is=bcoU-8BWxeDFlhvm", titulo: "🍎 Bolo de Maçã" },
+        { url: "https://youtube.com/watch?v=3UIueZaju9Y&is=DR28ITzI4JjofSqZ", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=h3BuRi768RE&is=sKwnRMH0bUzbtyCe", titulo: "🍚 Arroz Doce" },
+        { url: "https://youtube.com/watch?v=BhohuLcp8wk&is=sE68rqtaB0LNlKX6", titulo: "🍮 Leite Creme" },
+        { url: "https://youtube.com/watch?v=EpWS8NIMX4k&is=AqaSksMEY5M9w8M6", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=LDw5BPHR4u0&is=YGltFFxQdRf_cuBS", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=ySDoOpg1shA&is=v46BlTXNwl8ncl4I", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=A-2gc3fcUQY&is=kHWBpK6bEmWrCGCT", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=KOH9n_zLiUw&is=eXsHuYMjHYiGja-H", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=hpf6z4JwFOo&is=1GbOdgPYRfVHDLrB", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=BEdSPDdhbLo&is=12BAWgolE3olkBu7", titulo: "🥧 Tarte de Maçã" },
+        { url: "https://youtube.com/watch?v=MPclgHEIC_k&is=2tJWFY6L9INDaAcg", titulo: "🥧 Tarte de Maçã" }
+    ];
+
+    // Extrai o ID do vídeo do YouTube a partir do URL (para poder embutir o player)
+    function extrairVideoId(url) {
+        const match = url.match(/[?&]v=([^&]+)/);
+        return match ? match[1] : null;
+    }
+
     const grid = document.getElementById("receitasGrid");
+
+    // Agrupa os links extra por nome de doce (sem o emoji inicial), para mostrar 1 botão por doce
+    function agruparLinksPorCategoria(lista) {
+        const grupos = {};
+        const ordem = [];
+        lista.forEach(link => {
+            const nome = link.titulo.replace(/^\S+\s+/, "").trim();
+            if (!grupos[nome]) {
+                grupos[nome] = [];
+                ordem.push(nome);
+            }
+            grupos[nome].push(link);
+        });
+        return { grupos, ordem };
+    }
+
+    // Alterna o painel de uma categoria (tipo acordeão: só um aberto de cada vez, mantém o app compacto)
+    window.toggleCategoria = function (id, btn) {
+        const painel = document.getElementById(id);
+        const jaAberto = painel.classList.contains("aberto");
+        document.querySelectorAll(".painel-categoria").forEach(p => p.classList.remove("aberto"));
+        document.querySelectorAll(".btn-categoria").forEach(b => b.classList.remove("ativo"));
+        if (!jaAberto) {
+            painel.classList.add("aberto");
+            btn.classList.add("ativo");
+        }
+    };
+
     function renderReceitas() {
         let html = "";
+
         receitas.forEach((r, index) => {
             const videoId = videosPorReceita[index];
             const numero = index + 1;
             const ingredientesNegrito = r.ingredientes.split('\n').map(line => line.trim() ? `<strong>${line}</strong>` : '').join('<br>');
+
+            const isNew = index === receitas.length - 1;
+            const badgeNova = isNew ? ' <span class="badge-nova">✨ NOVA</span>' : '';
+
             html += `
                 <div class="card-receita">
                     <div class="video-wrapper">
@@ -335,7 +575,7 @@
                     </div>
                     <div class="conteudo">
                         <div class="titulo-receita">
-                            <span class="numero-receita">#${numero}</span> ${r.nome} <span class="badge-airfryer">Air Fryer</span>
+                            <span class="numero-receita">#${numero}</span> ${r.nome} <span class="badge-airfryer">Air Fryer</span>${badgeNova}
                         </div>
                         <div class="ingredientes">🥄 INGREDIENTES</div>
                         <div class="texto-item">${ingredientesNegrito}</div>
@@ -345,6 +585,55 @@
                 </div>
             `;
         });
+
+        // Bloco final: um botão por doce diferente. Ao tocar, abre só os links desse doce.
+        const { grupos, ordem } = agruparLinksPorCategoria(linksExtras);
+
+        let htmlCategorias = `
+            <div class="categorias-links">
+                <div class="titulo-links">
+                    <span class="emoji-link">🎬</span> ${linksExtras.length} receitas exclusivas no YouTube
+                </div>
+                <div class="botoes-categoria">
+        `;
+        ordem.forEach((nome, i) => {
+            const id = `cat-${i}`;
+            const links = grupos[nome];
+            if (links.length === 1) {
+                // Só 1 vídeo nesta categoria: o botão abre o YouTube diretamente
+                htmlCategorias += `<a class="btn-categoria" href="${links[0].url}" target="_blank" rel="noopener noreferrer">${nome} <span class="contagem">▶</span></a>`;
+            } else {
+                // Várias receitas do mesmo doce: o botão abre a lista de links
+                htmlCategorias += `<button type="button" class="btn-categoria" onclick="toggleCategoria('${id}', this)">${nome} <span class="contagem">(${links.length})</span></button>`;
+            }
+        });
+        htmlCategorias += `</div>`;
+
+        ordem.forEach((nome, i) => {
+            const id = `cat-${i}`;
+            const links = grupos[nome];
+            if (links.length > 1) {
+                // Vídeos embutidos: toca para tocar logo ali, sem nomes/legendas
+                htmlCategorias += `<div class="painel-categoria grelha-video" id="${id}">`;
+                links.forEach(link => {
+                    const vid = extrairVideoId(link.url);
+                    htmlCategorias += `
+                        <div class="video-mini">
+                            <iframe src="https://www.youtube.com/embed/${vid}?modestbranding=1&rel=0" 
+                                    title="${nome}" loading="lazy" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                        </div>
+                    `;
+                });
+                htmlCategorias += `</div>`;
+            }
+        });
+
+        htmlCategorias += `</div>`;
+
+        html += htmlCategorias;
+
         grid.innerHTML = html;
     }
     renderReceitas();
