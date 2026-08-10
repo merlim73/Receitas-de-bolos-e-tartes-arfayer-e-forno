@@ -101,6 +101,106 @@
             height: 100%;
             border: none;
         }
+        .btn-ampliar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 5;
+            background: rgba(0,0,0,0.6);
+            color: #ffda99;
+            border: 1px solid rgba(255,200,100,0.5);
+            border-radius: 40px;
+            padding: 7px 14px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(4px);
+            transition: all 0.25s ease;
+        }
+        .btn-ampliar:hover, .btn-ampliar:active {
+            background: rgba(230, 126, 34, 0.85);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .video-mini { position: relative; }
+        .video-mini .btn-ampliar {
+            padding: 5px 10px;
+            font-size: 0.7rem;
+        }
+        .modal-video-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
+        }
+        .modal-video-overlay.aberto {
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-video-topo {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            color: #ffda99;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 1rem;
+        }
+        .modal-video-titulo {
+            flex: 1;
+            padding-right: 12px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+        }
+        .btn-fechar-modal {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,200,100,0.5);
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-fechar-modal:active { background: rgba(230,126,34,0.85); }
+        .modal-video-corpo {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-video-frame-wrap {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            max-height: 100%;
+            background: #000;
+        }
+        .modal-video-frame-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        @media (orientation: landscape) and (max-width: 900px) {
+            .modal-video-topo { padding: 6px 12px; }
+            .modal-video-corpo { padding: 0; }
+        }
         .conteudo {
             padding: 1.6rem;
             background: linear-gradient(145deg, #fff4e8, #ffe2ca);
@@ -329,6 +429,21 @@
         Todas as receitas adaptadas para Air Fryer • Fáceis de fazer em Portugal
     </footer>
 </div>
+
+<div class="modal-video-overlay" id="modalVideo" onclick="if(event.target===this) fecharVideoAmpliado();">
+    <div class="modal-video-topo">
+        <div class="modal-video-titulo" id="modalVideoTitulo"></div>
+        <button type="button" class="btn-fechar-modal" onclick="fecharVideoAmpliado()">✕</button>
+    </div>
+    <div class="modal-video-corpo">
+        <div class="modal-video-frame-wrap">
+            <iframe id="modalVideoFrame" src="" title="Vídeo ampliado" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
 <script>
     // IDs base das primeiras receitas (1 a 26)
     const VIDEO_TARTE_FLAN = "JrBe5uemZdQ";
@@ -554,6 +669,31 @@
         }
     };
 
+    // Abre o vídeo em ecrã inteiro (modal), com autoplay
+    window.abrirVideoAmpliado = function (videoId, titulo) {
+        const modal = document.getElementById("modalVideo");
+        const frame = document.getElementById("modalVideoFrame");
+        const tituloEl = document.getElementById("modalVideoTitulo");
+        tituloEl.textContent = titulo || "";
+        frame.src = `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&autoplay=1&playsinline=1`;
+        modal.classList.add("aberto");
+        document.body.style.overflow = "hidden";
+    };
+
+    // Fecha o modal e para o vídeo (limpando o src)
+    window.fecharVideoAmpliado = function () {
+        const modal = document.getElementById("modalVideo");
+        const frame = document.getElementById("modalVideoFrame");
+        modal.classList.remove("aberto");
+        frame.src = "";
+        document.body.style.overflow = "";
+    };
+
+    // Fecha o modal com a tecla Esc
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") fecharVideoAmpliado();
+    });
+
     function renderReceitas() {
         let html = "";
 
@@ -564,6 +704,7 @@
 
             const isNew = index === receitas.length - 1;
             const badgeNova = isNew ? ' <span class="badge-nova">✨ NOVA</span>' : '';
+            const tituloEscapado = r.nome.replace(/'/g, "\\'");
 
             html += `
                 <div class="card-receita">
@@ -572,6 +713,7 @@
                                 title="Vídeo: ${r.nome}" frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                 allowfullscreen></iframe>
+                        <button type="button" class="btn-ampliar" onclick="abrirVideoAmpliado('${videoId}', '${tituloEscapado}')">⛶ Ampliar</button>
                     </div>
                     <div class="conteudo">
                         <div class="titulo-receita">
@@ -613,16 +755,18 @@
             const id = `cat-${i}`;
             const links = grupos[nome];
             if (links.length > 1) {
-                // Vídeos embutidos: toca para tocar logo ali, sem nomes/legendas
+                // Vídeos embutidos: toca para tocar logo ali, ou amplia com o botão
                 htmlCategorias += `<div class="painel-categoria grelha-video" id="${id}">`;
                 links.forEach(link => {
                     const vid = extrairVideoId(link.url);
+                    const nomeEscapado = nome.replace(/'/g, "\\'");
                     htmlCategorias += `
                         <div class="video-mini">
                             <iframe src="https://www.youtube.com/embed/${vid}?modestbranding=1&rel=0" 
                                     title="${nome}" loading="lazy" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                     allowfullscreen></iframe>
+                            <button type="button" class="btn-ampliar" onclick="abrirVideoAmpliado('${vid}', '${nomeEscapado}')">⛶</button>
                         </div>
                     `;
                 });
