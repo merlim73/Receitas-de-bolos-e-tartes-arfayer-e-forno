@@ -92,45 +92,63 @@
             border-radius: 32px 20px 0 0;
             transform: translateZ(5px);
             box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+            cursor: pointer;
         }
-        .video-wrapper iframe {
+        /* Miniatura (imagem) em vez de iframe — carrega muito mais rápido que dezenas de vídeos em simultâneo */
+        .video-thumb-img {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
             height: 100%;
-            border: none;
+            object-fit: cover;
+            background: #111;
+            transition: transform 0.4s ease, filter 0.4s ease;
         }
-        .btn-ampliar {
+        .video-wrapper:active .video-thumb-img { transform: scale(1.03); filter: brightness(0.75); }
+        .play-overlay {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 5;
-            background: rgba(0,0,0,0.6);
-            color: #ffda99;
-            border: 1px solid rgba(255,200,100,0.5);
-            border-radius: 40px;
-            padding: 7px 14px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            font-family: inherit;
-            cursor: pointer;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
-            gap: 6px;
-            backdrop-filter: blur(4px);
-            transition: all 0.25s ease;
+            justify-content: center;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%);
+            pointer-events: none;
         }
-        .btn-ampliar:hover, .btn-ampliar:active {
-            background: rgba(230, 126, 34, 0.85);
-            color: #fff;
-            transform: scale(1.05);
+        .play-icon {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 32% 30%, #ff8a3d, #c1440e 70%);
+            box-shadow: 0 12px 26px rgba(0,0,0,0.55), 0 0 0 6px rgba(255,255,255,0.14), inset 0 1px 3px rgba(255,255,255,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.25s ease;
         }
-        .video-mini { position: relative; }
-        .video-mini .btn-ampliar {
-            padding: 5px 10px;
+        .video-wrapper:active .play-icon { transform: scale(0.88); }
+        .play-icon::after {
+            content: "";
+            border-style: solid;
+            border-width: 11px 0 11px 18px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 5px;
+        }
+        .badge-toque {
+            position: absolute;
+            bottom: 10px;
+            left: 12px;
+            background: rgba(0,0,0,0.55);
+            color: #ffda99;
             font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 30px;
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(255,200,100,0.3);
         }
+        .video-mini { position: relative; cursor: pointer; }
         .modal-video-overlay {
             display: none;
             position: fixed;
@@ -341,36 +359,44 @@
             font-size: 0.75rem;
             margin-left: 3px;
         }
+        .btn-diversos {
+            cursor: pointer;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 800;
+            font-family: inherit;
+            padding: 12px 28px;
+            border-radius: 40px;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            border: 1px solid #ffdd99;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.35), inset 0 1px 3px rgba(255,255,255,0.4);
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+        .btn-diversos:hover { transform: translateY(-2px); box-shadow: 0 16px 30px rgba(0,0,0,0.45); }
+        .btn-diversos:active { transform: scale(0.97); }
         .painel-categoria {
             display: none;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 14px;
             margin-top: 6px;
-            padding-top: 14px;
+            padding-top: 18px;
             border-top: 1px dashed rgba(255, 200, 100, 0.3);
         }
         .painel-categoria.aberto { display: flex; }
-        .painel-categoria a {
-            color: #fff;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-decoration: none;
-            padding: 6px 14px;
-            border-radius: 26px;
-            background: rgba(255, 200, 100, 0.1);
-            border: 1px solid rgba(255, 200, 100, 0.15);
-            transition: all 0.3s ease;
+        .grupo-titulo-extra {
+            flex-basis: 100%;
+            text-align: center;
+            color: #ffda99;
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            margin: 10px 0 2px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
-        .painel-categoria a:hover {
-            background: rgba(255, 200, 100, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            border-color: rgba(255, 200, 100, 0.5);
-        }
-        .painel-categoria.grelha-video {
-            gap: 14px;
-        }
+        .grupo-titulo-extra:first-child { margin-top: 0; }
         .video-mini {
             width: 240px;
             max-width: 100%;
@@ -379,11 +405,6 @@
             overflow: hidden;
             background: #000;
             box-shadow: 0 10px 22px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,200,100,0.3);
-        }
-        .video-mini iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
         }
 
         footer {
@@ -642,31 +663,36 @@
 
     const grid = document.getElementById("receitasGrid");
 
-    // Agrupa os links extra por nome de doce (sem o emoji inicial), para mostrar 1 botão por doce
-    function agruparLinksPorCategoria(lista) {
-        const grupos = {};
-        const ordem = [];
-        lista.forEach(link => {
-            const nome = link.titulo.replace(/^\S+\s+/, "").trim();
-            if (!grupos[nome]) {
-                grupos[nome] = [];
-                ordem.push(nome);
-            }
-            grupos[nome].push(link);
-        });
-        return { grupos, ordem };
+    // Classifica cada vídeo extra em: bolo, tarte, leite (leite-creme) ou arroz (arroz doce)
+    function classificarExtra(tituloComEmoji) {
+        const nome = tituloComEmoji.replace(/^\S+\s+/, "").trim();
+        const n = nome.toLowerCase();
+        if (n.includes("arroz doce")) return "arroz";
+        if (n.includes("leite creme") || n.includes("leite-creme")) return "leite";
+        if (n.startsWith("tarte")) return "tarte";
+        if (n.startsWith("bolo")) return "bolo";
+        return "outro";
     }
 
-    // Alterna o painel de uma categoria (tipo acordeão: só um aberto de cada vez, mantém o app compacto)
-    window.toggleCategoria = function (id, btn) {
-        const painel = document.getElementById(id);
+    // Agrupa TODOS os links extra pela ordem pedida: Bolos > Tartes > Leite-creme > Arroz doce
+    function agruparExtrasPorOrdem(lista) {
+        const ordemCategorias = ["bolo", "tarte", "leite", "arroz", "outro"];
+        const rotulos = { bolo: "🍰 Bolos", tarte: "🥧 Tartes", leite: "🍮 Leite-Creme", arroz: "🍚 Arroz Doce", outro: "✨ Outras" };
+        const grupos = { bolo: [], tarte: [], leite: [], arroz: [], outro: [] };
+        lista.forEach(link => {
+            grupos[classificarExtra(link.titulo)].push(link);
+        });
+        return ordemCategorias
+            .filter(cat => grupos[cat].length > 0)
+            .map(cat => ({ categoria: cat, rotulo: rotulos[cat], links: grupos[cat] }));
+    }
+
+    // Alterna o painel único "Diversos" (aberto/fechado)
+    window.toggleDiversos = function (btn) {
+        const painel = document.getElementById("painelDiversos");
         const jaAberto = painel.classList.contains("aberto");
-        document.querySelectorAll(".painel-categoria").forEach(p => p.classList.remove("aberto"));
-        document.querySelectorAll(".btn-categoria").forEach(b => b.classList.remove("ativo"));
-        if (!jaAberto) {
-            painel.classList.add("aberto");
-            btn.classList.add("ativo");
-        }
+        painel.classList.toggle("aberto", !jaAberto);
+        btn.classList.toggle("ativo", !jaAberto);
     };
 
     // Abre o vídeo em ecrã inteiro (modal), com autoplay
@@ -708,12 +734,12 @@
 
             html += `
                 <div class="card-receita">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0" 
-                                title="Vídeo: ${r.nome}" frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen></iframe>
-                        <button type="button" class="btn-ampliar" onclick="abrirVideoAmpliado('${videoId}', '${tituloEscapado}')">⛶ Ampliar</button>
+                    <div class="video-wrapper" onclick="abrirVideoAmpliado('${videoId}', '${tituloEscapado}')">
+                        <img class="video-thumb-img" loading="lazy" decoding="async"
+                             src="https://i.ytimg.com/vi/${videoId}/mqdefault.jpg"
+                             alt="Vídeo: ${r.nome}">
+                        <div class="play-overlay"><div class="play-icon"></div></div>
+                        <span class="badge-toque">▶ Toque para ver em ecrã inteiro</span>
                     </div>
                     <div class="conteudo">
                         <div class="titulo-receita">
@@ -728,53 +754,37 @@
             `;
         });
 
-        // Bloco final: um botão por doce diferente. Ao tocar, abre só os links desse doce.
-        const { grupos, ordem } = agruparLinksPorCategoria(linksExtras);
+        // Bloco final: UM único botão "Diversos" que abre todos os vídeos extra,
+        // ordenados por Bolos > Tartes > Leite-Creme > Arroz Doce. Miniaturas leves (carregam rápido);
+        // tocar num vídeo abre logo em ecrã inteiro.
+        const gruposOrdenados = agruparExtrasPorOrdem(linksExtras);
 
         let htmlCategorias = `
             <div class="categorias-links">
                 <div class="titulo-links">
                     <span class="emoji-link">🎬</span> ${linksExtras.length} receitas exclusivas no YouTube
                 </div>
-                <div class="botoes-categoria">
+                <button type="button" class="btn-diversos" onclick="toggleDiversos(this)">
+                    🍰 Diversos: Bolos • Tartes • Leite-Creme • Arroz Doce
+                </button>
+                <div class="painel-categoria grelha-video" id="painelDiversos">
         `;
-        ordem.forEach((nome, i) => {
-            const id = `cat-${i}`;
-            const links = grupos[nome];
-            if (links.length === 1) {
-                // Só 1 vídeo nesta categoria: o botão abre o YouTube diretamente
-                htmlCategorias += `<a class="btn-categoria" href="${links[0].url}" target="_blank" rel="noopener noreferrer">${nome} <span class="contagem">▶</span></a>`;
-            } else {
-                // Várias receitas do mesmo doce: o botão abre a lista de links
-                htmlCategorias += `<button type="button" class="btn-categoria" onclick="toggleCategoria('${id}', this)">${nome} <span class="contagem">(${links.length})</span></button>`;
-            }
+        gruposOrdenados.forEach(grupo => {
+            htmlCategorias += `<div class="grupo-titulo-extra">${grupo.rotulo}</div>`;
+            grupo.links.forEach(link => {
+                const vid = extrairVideoId(link.url);
+                const nomeVideo = link.titulo.replace(/^\S+\s+/, "").trim();
+                const nomeEscapado = nomeVideo.replace(/'/g, "\\'");
+                htmlCategorias += `
+                    <div class="video-mini" onclick="abrirVideoAmpliado('${vid}', '${nomeEscapado}')">
+                        <img class="video-thumb-img" loading="lazy" decoding="async"
+                             src="https://i.ytimg.com/vi/${vid}/mqdefault.jpg" alt="${nomeVideo}">
+                        <div class="play-overlay"><div class="play-icon"></div></div>
+                    </div>
+                `;
+            });
         });
-        htmlCategorias += `</div>`;
-
-        ordem.forEach((nome, i) => {
-            const id = `cat-${i}`;
-            const links = grupos[nome];
-            if (links.length > 1) {
-                // Vídeos embutidos: toca para tocar logo ali, ou amplia com o botão
-                htmlCategorias += `<div class="painel-categoria grelha-video" id="${id}">`;
-                links.forEach(link => {
-                    const vid = extrairVideoId(link.url);
-                    const nomeEscapado = nome.replace(/'/g, "\\'");
-                    htmlCategorias += `
-                        <div class="video-mini">
-                            <iframe src="https://www.youtube.com/embed/${vid}?modestbranding=1&rel=0" 
-                                    title="${nome}" loading="lazy" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <button type="button" class="btn-ampliar" onclick="abrirVideoAmpliado('${vid}', '${nomeEscapado}')">⛶</button>
-                        </div>
-                    `;
-                });
-                htmlCategorias += `</div>`;
-            }
-        });
-
-        htmlCategorias += `</div>`;
+        htmlCategorias += `</div></div>`;
 
         html += htmlCategorias;
 
